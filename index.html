@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juice Bar | Cafe & Fresh Juices</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light" style="font-family: 'Poppins', sans-serif;">
+
+    <nav class="navbar navbar-expand-lg shadow-sm" style="background: linear-gradient(135deg, #0d1b2a, #1b263b);">
+        <div class="container-fluid px-lg-5">
+            <a class="navbar-brand fw-black fs-3 d-flex align-items-center gap-2" href="#" style="color: #ffb703;">
+                <i class="fa-solid fa-mug-hot fs-2" style="color: #ff6b35;"></i> JUICE BAR
+            </a>
+            <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto gap-lg-3 text-center my-2 my-lg-0">
+                    <li class="nav-item"><a class="nav-link text-white fw-bold active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white-50 fw-semibold" href="#menu">Menu (100 Drinks)</a></li>
+                    <li class="nav-item"><a class="nav-link text-white-50 fw-semibold" href="#offers">Special Offers</a></li>
+                </ul>
+                <div class="d-flex align-items-center justify-content-center gap-2">
+                    <button class="btn fw-bold px-3 py-2 text-white border-0 shadow-sm position-relative" 
+                            style="background: linear-gradient(135deg, #ff6b35, #ff85a1);"
+                            data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                        <i class="fa-solid fa-basket-shopping me-1"></i> Cart 
+                        <span id="cartBadge" class="badge bg-white text-dark rounded-pill ms-1">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container-fluid px-lg-5 my-4">
+        <div class="p-4 p-md-5 rounded-5 shadow-lg text-white position-relative overflow-hidden" style="background: linear-gradient(135deg, #ff6b35 0%, #d90429 50%, #70e000 100%);">
+            <div class="row align-items-center position-relative z-1">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <span class="badge bg-white text-dark fw-bold px-3 py-2 rounded-pill shadow-sm mb-3 fs-6">
+                        <i class="fa-solid fa-fire text-danger me-1"></i> 100+ Fresh & Diverse Drinks
+                    </span>
+                    <h1 class="display-4 fw-black mb-3">Our Largest Drinks Selection Ever!</h1>
+                    <p class="fs-5 text-white-50 mb-4 fw-semibold">Choose from 100 premium drinks including specialty coffees, smoothies, milkshakes, fresh juices, and organic detoxes.</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                        <a href="#menu" class="btn btn-dark btn-lg fw-bold px-4 py-2 rounded-pill shadow">
+                            <i class="fa-solid fa-list me-2 text-warning"></i> Explore 100 Drinks
+                        </a>
+                        <a href="#offers" class="btn btn-outline-light btn-lg fw-bold px-4 py-2 rounded-pill shadow">
+                            <i class="fa-solid fa-percent me-2"></i> View Offers
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center mt-4 mt-lg-0">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR-1xej_TGRk3AYjZg2KObRUciS3CDf16qvfaTosiQgg&s=10" class="img-fluid rounded-4 shadow-lg border border-4 border-white" style="max-height: 280px; width: 100%; object-fit: cover;" alt="Hero Drink">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid px-lg-5 my-4" id="menu">
+        <div class="row g-4">
+            
+            <aside class="col-lg-3 col-md-4">
+                <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+                    
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2 text-dark"><i class="fa-solid fa-magnifying-glass me-1 text-danger"></i> Search 100 Drinks:</label>
+                        <input type="text" id="searchInput" class="form-control rounded-3 border-2" placeholder="Search drink or ingredient...">
+                    </div>
+
+                    <h5 class="fw-bold mb-3 border-bottom pb-2 d-flex justify-content-between align-items-center" style="color: #d90429;">
+                        <span><i class="fa-solid fa-layer-group me-2"></i> Categories</span>
+                    </h5>
+                    
+                    <div class="list-group list-group-flush gap-2" id="filterButtons">
+                        <button class="filter-btn list-group-item list-group-item-action border-0 rounded-3 fw-bold active text-white shadow-sm" data-category="all" style="background: linear-gradient(135deg, #ff6b35, #ff85a1);">
+                            <i class="fa-solid fa-border-all me-2"></i> All Drinks (<span id="countAll">100</span>)
+                        </button>
+                        <button class="filter-btn list-group-item list-group-item-action border-0 rounded-3 fw-semibold bg-light text-dark" data-category="latte">
+                            <i class="fa-solid fa-mug-saucer me-2 text-warning"></i> Latte & Coffee
+                        </button>
+                        <button class="filter-btn list-group-item list-group-item-action border-0 rounded-3 fw-semibold bg-light text-dark" data-category="macchiato">
+                            <i class="fa-solid fa-coffee me-2 text-danger"></i> Macchiato
+                        </button>
+                        <button class="filter-btn list-group-item list-group-item-action border-0 rounded-3 fw-semibold bg-light text-dark" data-category="smoothie">
+                            <i class="fa-solid fa-blender me-2 text-primary"></i> Smoothie
+                        </button>
+                        <button class="filter-btn list-group-item list-group-item-action border-0 rounded-3 fw-semibold bg-light text-dark" data-category="milkshake">
+                            <i class="fa-solid fa-ice-cream me-2 text-info"></i> Milkshake
+                        </button>
+                        <button class="filter-btn list-group-item list-group-item-action border-0 rounded-3 fw-semibold bg-light text-dark" data-category="fresh">
+                            <i class="fa-solid fa-lemon me-2 text-warning"></i> Fresh Juice
+                        </button>
+                        <button class="filter-btn list-group-item list-group-item-action border-0 rounded-3 fw-semibold bg-light text-dark" data-category="detox">
+                            <i class="fa-solid fa-seedling me-2 text-success"></i> Healthy Detox
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="col-lg-6 col-md-8">
+                <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+                    <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+                        <h4 class="fw-bold m-0 text-dark"><i class="fa-solid fa-utensils me-2 text-danger"></i> Drink Menu</h4>
+                        <span class="badge rounded-pill px-3 py-2 bg-success text-white" id="itemCounterBadge">Showing 100 Drinks</span>
+                    </div>
+
+                    <div class="row g-3" id="juiceContainer">
+                    </div>
+                </div>
+            </main>
+
+            <aside class="col-lg-3 col-md-12" id="offers">
+                <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+                    <h5 class="fw-bold mb-3 border-bottom pb-2 d-flex justify-content-between align-items-center" style="color: #d90429;">
+                        <span><i class="fa-solid fa-percent me-2"></i> Special Offers</span>
+                    </h5>
+                    <div class="d-flex flex-column gap-3">
+                        <div class="p-3 rounded-3 text-white shadow-sm" style="background: linear-gradient(135deg, #7209b7, #4361ee);">
+                            <span class="badge bg-warning text-dark fw-bold mb-1">Coffee Combo</span>
+                            <h6 class="fw-bold m-0">Macchiato + Latte</h6>
+                            <small class="opacity-90 fs-7">Get 25% off when you order any two coffees.</small>
+                        </div>
+                        <div class="p-3 rounded-3 text-white shadow-sm" style="background: linear-gradient(135deg, #ff6b35, #d90429);">
+                            <span class="badge bg-white text-dark fw-bold mb-1">Summer Refresh</span>
+                            <h6 class="fw-bold m-0">Smoothie + Milkshake</h6>
+                            <small class="opacity-90 fs-7">Buy 1 and get the second drink at 50% off.</small>
+                        </div>
+                        <div class="p-3 rounded-3 text-white shadow-sm" style="background: linear-gradient(135deg, #38b000, #007200);">
+                            <span class="badge bg-white text-dark fw-bold mb-1">Healthy Pack</span>
+                            <h6 class="fw-bold m-0">Weekly Detox Bundle</h6>
+                            <small class="opacity-90 fs-7">Buy 3 Detox drinks and get 1 free.</small>
+                        </div>
+                        <div class="p-3 rounded-3 text-white shadow-sm" style="background: linear-gradient(135deg, #f72585, #7209b7);">
+                            <span class="badge bg-warning text-dark fw-bold mb-1">Family Pack</span>
+                            <h6 class="fw-bold m-0">5 Fresh Juices Combo</h6>
+                            <small class="opacity-90 fs-7">Select any 5 juices for only $12.99.</small>
+                        </div>
+                        <div class="p-3 rounded-3 text-white shadow-sm" style="background: linear-gradient(135deg, #ffb703, #fb8500);">
+                            <span class="badge bg-dark text-white fw-bold mb-1">Happy Hour</span>
+                            <h6 class="fw-bold m-0">30% Off All Milkshakes</h6>
+                            <small class="opacity-90 fs-7">Available daily from 4:00 PM to 6:00 PM.</small>
+                        </div>
+                        <div class="p-3 rounded-3 text-white shadow-sm" style="background: linear-gradient(135deg, #023e8a, #0077b6);">
+                            <span class="badge bg-light text-dark fw-bold mb-1">Morning Kickstart</span>
+                            <h6 class="fw-bold m-0">Latte + Croissant</h6>
+                            <small class="opacity-90 fs-7">Start your day with 20% off coffee orders.</small>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </section>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="width: 380px;">
+        <div class="offcanvas-header text-white" style="background: linear-gradient(135deg, #ff6b35, #d90429);">
+            <h5 class="offcanvas-title fw-bold"><i class="fa-solid fa-cart-shopping me-2"></i> Your Order</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+            <div id="cartItemsList" class="d-flex flex-column gap-3 overflow-y-auto pe-1">
+            </div>
+            
+            <div class="border-top pt-3 mt-3">
+                <div class="d-flex justify-content-between align-items-center mb-3 fs-5 fw-bold">
+                    <span>Total:</span>
+                    <span id="cartTotalPrice" class="text-success fw-black">$0.00</span>
+                </div>
+                <button id="btnCheckout" class="btn w-100 fw-bold py-2 text-white rounded-3 shadow" style="background: linear-gradient(135deg, #2b9348, #55a630);" disabled>
+                    <i class="fa-solid fa-check-circle me-1"></i> Checkout Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 text-center p-4">
+                <div class="modal-body">
+                    <i class="fa-solid fa-circle-check text-success display-1 mb-3"></i>
+                    <h3 class="fw-bold">Order Received!</h3>
+                    <p class="text-muted">Your fresh drinks are being prepared and will be ready shortly.</p>
+                    <button class="btn btn-dark fw-bold px-4 rounded-pill mt-2" data-bs-dismiss="modal">Great!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+        <div id="addToast" class="toast align-items-center text-bg-success border-0 rounded-3 shadow" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body fw-bold fs-6">
+                    <i class="fa-solid fa-check me-2"></i> Item added to cart!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-white py-4 mt-5 text-center" style="background: linear-gradient(135deg, #0d1b2a, #1b263b);">
+        <p class="m-0">&copy; 2026 Juice Bar - All Rights Reserved</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const products = [
+            { id: 1, name: "Iced Caramel Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.50, bgBadge: "bg-warning text-dark", desc: "Rich espresso blended with milk and sweet caramel syrup.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVy43u8Z9fGNi6f9Yp6EQ3wr0uubhfGYJEKqb85Z_KLg&s=10" },
+            { id: 2, name: "Iced Spanish Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.80, bgBadge: "bg-warning text-dark", desc: "Sweet condensed milk mixed with dark espresso over ice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBQ8sV2qWX_WVcVmOsm0N5D79jriZiNO1CSEb7Wxg_BA&s" },
+            { id: 3, name: "Almond Milk Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.20, bgBadge: "bg-warning text-dark", desc: "Smooth organic almond milk infused with fresh espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJO4QzGU4rNb7CA0AuMV6PrHiLRI03_cLw5-0kAacy6g&s=10" },
+            { id: 4, name: "Roasted Hazelnut Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.60, bgBadge: "bg-warning text-dark", desc: "Nutty hazelnut flavor combined with steamed creamy milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFIslTbhUd4-F8iRDKdz0CeVXg8M0MBV-ybYJnJAgmWA&s=10" },
+            { id: 5, name: "Iced Vanilla Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.30, bgBadge: "bg-warning text-dark", desc: "Classic Madagascar vanilla syrup with cold brew espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGWMwsQqrPwYPdLt7fagMmJjjqALW7nQZ9LmUbzmhd5w&s=10" },
+            { id: 6, name: "Warm Mocha Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.70, bgBadge: "bg-warning text-dark", desc: "Rich chocolate syrup blended with fresh espresso and milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU6yYJonsn7TF4x6wbVctsMEfA8Ye7keqgB2tOlKGL9w&s=10" },
+            { id: 7, name: "Coconut Milk Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.50, bgBadge: "bg-warning text-dark", desc: "Exotic coconut milk infused with a double shot of coffee.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUCvP4CR6iEe35X8Anuii7zeeWb6IXQWYPLPHIFqi8pg&s=10" },
+            { id: 8, name: "Cinnamon Honey Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.40, bgBadge: "bg-warning text-dark", desc: "Pure honey and Ceylon cinnamon dusting over steamed milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNSJC-acZMqaCBDjedv905YM4jW-sM0dMwq4Twm2OH6A&s=10" },
+            { id: 9, name: "Brown Sugar Boba Latte", category: "latte", categoryName: "Latte & Coffee", price: 5.10, bgBadge: "bg-warning text-dark", desc: "Caramelized brown sugar swirl with fresh espresso milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSViRuJdA1-b_pIPa5sd4tr8R9RGTsQzDTW2sgNadhxOA&s=10" },
+            { id: 10, name: "White Chocolate Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.90, bgBadge: "bg-warning text-dark", desc: "Creamy white chocolate sauce paired with dark roast coffee.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD3lKBlrSMF8qU6FwiLie_zl2xtiaov28BC65w1kKA4Q&s=10" },
+            { id: 11, name: "Iced Matcha Green Tea Latte", category: "latte", categoryName: "Latte & Coffee", price: 5.00, bgBadge: "bg-warning text-dark", desc: "Japanese ceremonial green tea whisked with cold milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8-ozgla1-XvRP5Tp-yzBbFCtrOYgPM9KfSDhFa_UdAQ&s=10" },
+            { id: 12, name: "Iced Saffron Latte", category: "latte", categoryName: "Latte & Coffee", price: 5.50, bgBadge: "bg-warning text-dark", desc: "Premium saffron syrup with cold milk and fresh espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfsXxFR04vsVRicggY3iBwUqISk-csmAOEy42oSnQ6Cw&s=10" },
+            { id: 13, name: "Toasted Caramel Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.60, bgBadge: "bg-warning text-dark", desc: "Smokey toasted caramel syrup with velvety micro-foam milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYLlhmqWz0Mv6-rtUltW1mCBxtD02a0Lihu9Ebpwig5g&s=10" },
+            { id: 14, name: "Hot Spanish Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.80, bgBadge: "bg-warning text-dark", desc: "Warm steamed milk with condensed milk and dark espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQszTtg2a4R5Kh0hnwhtAKySFKAVRqImZH5x6dpyeRBgg&s=10" },
+            { id: 15, name: "Irish Coffee Style Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.90, bgBadge: "bg-warning text-dark", desc: "Non-alcoholic Irish cream syrup infused with strong coffee.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD4DDsJjZ7-91ZmVdmOtTNXPG_6Svk4OdPBDYqFWViFg&s=10" },
+            { id: 16, name: "Oat Milk Vanilla Latte", category: "latte", categoryName: "Latte & Coffee", price: 4.70, bgBadge: "bg-warning text-dark", desc: "Creamy oat milk paired with natural vanilla extract.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNhsYcFP0Xs7mIKB5KwwiYpsJEK_lCBsknnbLY5tzblw&s=10" },
+            { id: 17, name: "Pistachio Cream Latte", category: "latte", categoryName: "Latte & Coffee", price: 5.30, bgBadge: "bg-warning text-dark", desc: "Rich pistachio paste swirled with fresh espresso and cold foam.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgbFPim1S0p6QqVb8jLo2LUIDy_IML2u43HRSqqRt6Tw&s=10" },
+
+            { id: 18, name: "Iced Caramel Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.90, bgBadge: "bg-danger", desc: "Fresh milk with vanilla syrup, topped with espresso and caramel drizzle.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLA6lgN2oHloYnlOtC-O_8N_MD91Qns16iaGhpXBx7nA&s=10" },
+            { id: 19, name: "Intense Vanilla Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.60, bgBadge: "bg-danger", desc: "Double espresso poured over velvety steamed vanilla milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsD0F8-_5pR3qHbTCoyEMJ9dnsCjVUpwuXgKPHk20pDw&s=10" },
+            { id: 20, name: "Classic Espresso Macchiato", category: "macchiato", categoryName: "Macchiato", price: 3.50, bgBadge: "bg-danger", desc: "Bold shot of espresso stained with a dollop of milk foam.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtlNqIuEDG6cZQ1jkQS7HJE445MXK433xbhervqTnzbA&s=10" },
+            { id: 21, name: "Hazelnut Cream Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.70, bgBadge: "bg-danger", desc: "Aromatic hazelnut flavor topped with thick espresso layer.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgjxg_rFYcPjlrYxFaoK52wEI7NDQdICRY7EDfpsF6Fg&s=10" },
+            { id: 22, name: "Dark Chocolate Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.80, bgBadge: "bg-danger", desc: "70% cocoa sauce layered with cold milk and dark espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdyXB8cerM5gVSJJkel0Afl3DfXf_I-3K3CiwIxFwVaw&s=10" },
+            { id: 23, name: "Coconut Cloud Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.90, bgBadge: "bg-danger", desc: "Fluffy coconut foam stained with concentrated espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7W1yIjoybPRi-A3k0wV7BXOKSqp95JQOkM-qhIxX-KA&s" },
+            { id: 24, name: "Blueberry Macchiato", category: "macchiato", categoryName: "Macchiato", price: 5.10, bgBadge: "bg-danger", desc: "Subtle fruity blueberry notes layered with milk and espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN0JOVgeb6XKMoAcR-_AyEzvdKE1NJ_q1xUfe9hwJILA&s=10" },
+            { id: 25, name: "Salted Caramel Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.90, bgBadge: "bg-danger", desc: "Sweet and salty caramel sauce over layered coffee.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMoi1rFLDIWtmtV6-aNBQvWj1YIEB4fN47QCnx-FzlxA&s=10" },
+            { id: 26, name: "Almond Crunch Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.70, bgBadge: "bg-danger", desc: "Roasted almond syrup topped with fine coffee crema.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-Wb2v-X6lSL-h_MGwM4Qrg3yIta-3npixqrwK24KxQ&s=10" },
+            { id: 27, name: "Honey Spice Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.60, bgBadge: "bg-danger", desc: "Wildflower honey paired with warm aromatic spices and espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzRsvqXSv03dqWa6nZ61uwZnG5ECnH7KWEapIb8sNNA&s" },
+            { id: 28, name: "Iced Pistachio Macchiato", category: "macchiato", categoryName: "Macchiato", price: 5.40, bgBadge: "bg-danger", desc: "Pistachio sauce layered under cold milk and fresh espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwMFw-MEUfszb4c3d9p71aXgDJv65q0aA9l1VW8_ZiBg&s=10" },
+            { id: 29, name: "White Mocha Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.90, bgBadge: "bg-danger", desc: "Velvety white mocha sauce with espresso float.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqvl_mYmmPXt_FKymiGvPk8qpMoBKFCyrE2An7aae_bg&s=10" },
+            { id: 30, name: "Cappuccino Style Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.30, bgBadge: "bg-danger", desc: "Extra thick milk foam stained with a double ristretto.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbdB8V2uzgRYJW_YHJR5GsiFzDVoz64Ya1KtYj-yYFrQ&s=10" },
+            { id: 31, name: "Double Shot Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.10, bgBadge: "bg-danger", desc: "Strong double espresso with a light touch of warm milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEsHLRof4y3DbI_QyfQxp1m3p935zlWDGZzMKcR2H3nA&s=10" },
+            { id: 32, name: "Cinnamon Bark Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.50, bgBadge: "bg-danger", desc: "Fresh ground cinnamon layered in milk foam and dark coffee.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxlIEMxW-mS2UgyDekHT4kIkBGuDMlMCfK5FmFmjw1Ig&s=10" },
+            { id: 33, name: "Butterscotch Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.80, bgBadge: "bg-danger", desc: "Rich butterscotch drizzle layered with ice and espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrd7PR0zi2Wg2lTdaAoWHKspAXb_7SwC6dPlkrwLBKVQ&s=10" },
+            { id: 34, name: "Toffee Nut Macchiato", category: "macchiato", categoryName: "Macchiato", price: 4.80, bgBadge: "bg-danger", desc: "Sweet toffee nut flavor mixed with creamy milk and espresso.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_VxBIRIaklKCKbJp8Lre4u9Y2hBwexkhiEsk7WfAkCg&s=10" },
+
+            { id: 35, name: "Mixed Berry Blast Smoothie", category: "smoothie", categoryName: "Smoothie", price: 5.20, bgBadge: "bg-primary", desc: "Blueberries, strawberries, and blackberries blended with Greek yogurt.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpgMcivbiR_O-5Apew_B69D3X9C9ayNeZuVlinYeC38Q&s=10" },
+            { id: 36, name: "Mango Pineapple Paradise", category: "smoothie", categoryName: "Smoothie", price: 5.00, bgBadge: "bg-primary", desc: "Tropical mango chunks and sweet pineapple blended with ice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn_G3AIZGod1YM0tlj5GF5TFXXpU-gtEkxeDFpiCCv-g&s=10" },
+            { id: 37, name: "Strawberry Banana Twist", category: "smoothie", categoryName: "Smoothie", price: 4.80, bgBadge: "bg-primary", desc: "Classic combination of sweet strawberries and ripe banana.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUmxn6g9-oOWJKooLqXZNDC4VAJbqiFtB2oIeDe9Fn3w&s=10" },
+            { id: 38, name: "Kiwi Mint Refresher", category: "smoothie", categoryName: "Smoothie", price: 4.90, bgBadge: "bg-primary", desc: "Fresh green kiwis crushed with fresh mint leaves and honey.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYwhbSfhs5-qbTQ2Wcm_j4t_XXeX0rDV7gBOK1VzGm0w&s=10" },
+            { id: 39, name: "Watermelon Wave Smoothie", category: "smoothie", categoryName: "Smoothie", price: 4.50, bgBadge: "bg-primary", desc: "Hydrating watermelon blended with lime juice and crushed ice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQsZat2z6oLXUZIDxjqNg9dT8d2j5wG5rTSfrLLltJ3A&s=10" },
+            { id: 40, name: "Peach Passion Smoothie", category: "smoothie", categoryName: "Smoothie", price: 5.10, bgBadge: "bg-primary", desc: "Juicy peaches and passionfruit puree blended smoothly.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi2NCdbJ0tkocSohv4F45GWdz7AGN44UZV5CD4KIoc9Q&s=10" },
+            { id: 41, name: "Avocado Honey Power", category: "smoothie", categoryName: "Smoothie", price: 5.60, bgBadge: "bg-primary", desc: "Creamy Hass avocado blended with natural wildflower honey.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-BsOWNk3b9aFZgci19yfj0sUPsq14I7bXH7DICmXaBg&s" },
+            { id: 42, name: "Pina Colada Smoothie", category: "smoothie", categoryName: "Smoothie", price: 5.20, bgBadge: "bg-primary", desc: "Pineapple juice blended with creamy coconut cream and ice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwlwlFuhzoIsrfjrNEsbKsR5kN4fNVJvqBLGM4YXLCgA&s=10" },
+            { id: 43, name: "Blueberry Lemonade Smoothie", category: "smoothie", categoryName: "Smoothie", price: 4.90, bgBadge: "bg-primary", desc: "Tart lemonade blended with sweet organic blueberries.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJEgmbqlT8kExhHMUL5WwZHRVh280Q9AGfoXXmi2picg&s=10" },
+            { id: 44, name: "Pomegranate Lime Smoothie", category: "smoothie", categoryName: "Smoothie", price: 5.00, bgBadge: "bg-primary", desc: "Antioxidant-rich pomegranate seeds blended with fresh lime.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT74o0Qs7TkDY__fTnINep4Bqx6FI6OsFUqePKpwKecjQ&s=10" },
+            { id: 45, name: "Guava Mint Fusion", category: "smoothie", categoryName: "Smoothie", price: 4.70, bgBadge: "bg-primary", desc: "Pink guava pulp crushed with garden mint leaves.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSHH7wfF5J93yj5ifdfb-zDJVMPUlV56QhdE9PbCrrrA&s=10" },
+            { id: 46, name: "Apricot Yogurt Smoothie", category: "smoothie", categoryName: "Smoothie", price: 4.80, bgBadge: "bg-primary", desc: "Sweet apricot nectar blended with low-fat vanilla yogurt.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgI0N4u84Xt-bg9ianDu3l87swIJ-l7SMi088teFi5AQ&s=10" },
+            { id: 47, name: "Dragon Fruit Pitaya", category: "smoothie", categoryName: "Smoothie", price: 5.80, bgBadge: "bg-primary", desc: "Vibrant red dragon fruit blended with apple juice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUq4IRmOs4P-iPIGG_E24fIBubA5bLcTN7QaaneQq9pQ&s=10" },
+            { id: 48, name: "Cacao Banana Energy", category: "smoothie", categoryName: "Smoothie", price: 5.30, bgBadge: "bg-primary", desc: "Raw cacao powder, ripe banana, and almond butter blend.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1dNvMwYVNJNoleDjQGH2H97Abbjy_28TbIWz81ZTGsg&s=10" },
+            { id: 49, name: "Papaya Breeze Smoothie", category: "smoothie", categoryName: "Smoothie", price: 4.90, bgBadge: "bg-primary", desc: "Fresh tropical papaya blended with lime and coconut water.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDNFNCk8nGEfFtvzV8jljDqhTufKb4CU8E4b-lHjLK3A&s" },
+            { id: 50, name: "Green Apple Zest", category: "smoothie", categoryName: "Smoothie", price: 4.60, bgBadge: "bg-primary", desc: "Crisp green apples blended with lemon juice and crushed ice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD1t1HonI4UcT-QohQYSCTcKdpUMb3C8HKEcfX8-pO_A&s=10" },
+            { id: 51, name: "Red Cherry Vanilla Smoothie", category: "smoothie", categoryName: "Smoothie", price: 5.40, bgBadge: "bg-primary", desc: "Pitted sweet cherries blended with vanilla bean milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAcH0Y5tnjvZwJRwyvC6eMpBMiGVHdD6I39aJZmTYCyw&s=10" },
+
+            { id: 52, name: "Oreo Chocolate Milkshake", category: "milkshake", categoryName: "Milkshake", price: 5.50, bgBadge: "bg-info text-dark", desc: "Crushed Oreo cookies blended with dark chocolate ice cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDUGBuvC7SIglcdjiHhG4kzn3SxalJIGK01fyXl4QPGA&s=10" },
+            { id: 53, name: "Fresh Strawberry Shake", category: "milkshake", categoryName: "Milkshake", price: 5.20, bgBadge: "bg-info text-dark", desc: "Whole strawberries blended with thick vanilla ice cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3KkfXVi3LcYpwoNc7tFqvSUVE_tZ9gRgUFhI5aG6Qpw&s" },
+            { id: 54, name: "Classic Vanilla Shake", category: "milkshake", categoryName: "Milkshake", price: 4.80, bgBadge: "bg-info text-dark", desc: "Rich French vanilla ice cream whipped with whole milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiVQhFb36QEXtDC3lcR8mKTonQCF2wKFO24N2LKd-SsQ&s=10" },
+            { id: 55, name: "Lotus Biscoff Shake", category: "milkshake", categoryName: "Milkshake", price: 5.80, bgBadge: "bg-info text-dark", desc: "Speculoos cookie butter blended with vanilla bean cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRni8USQBkl6CuW1QoeX55Fcu7DNnw170QWei290BOEXw&s=10" },
+            { id: 56, name: "Rich Nutella Milkshake", category: "milkshake", categoryName: "Milkshake", price: 5.60, bgBadge: "bg-info text-dark", desc: "Generous hazelnut cocoa Nutella cream blended with ice cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtAoC1M8Dy3w5m-hbUKAp2Sep5TNxlVQaXl6OabfgxIA&s" },
+            { id: 57, name: "Pistachio Dream Shake", category: "milkshake", categoryName: "Milkshake", price: 6.20, bgBadge: "bg-info text-dark", desc: "Real pistachio gelato topped with chopped pistachios.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoOkWIJQFAIf8jGRxpWoOonFYYGIJq-Kce24wp8Bj2EQ&s" },
+            { id: 58, name: "KitKat Crunch Shake", category: "milkshake", categoryName: "Milkshake", price: 5.50, bgBadge: "bg-info text-dark", desc: "Crispy KitKat wafer bars blended with chocolate ice cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREcbYVD3oeGRyXZsrZJchamipHvHuZZrh9fC5wjvQc_g&s=10" },
+            { id: 59, name: "Banana Caramel Shake", category: "milkshake", categoryName: "Milkshake", price: 5.00, bgBadge: "bg-info text-dark", desc: "Fresh bananas blended with warm caramel fudge sauce.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX66KWqVyihr_GKKGCKpkxO_Opql5XbYKCj6VBwmOeRA&s=10" },
+            { id: 60, name: "Snickers Peanut Shake", category: "milkshake", categoryName: "Milkshake", price: 5.70, bgBadge: "bg-info text-dark", desc: "Peanut butter, caramel, and chocolate bars blended together.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC3Ovdp6ERMamz7l_rhRwl3EGNwzDWvtOTBvtcdYdlpA&s=10" },
+            { id: 61, name: "Maltesers Malt Milkshake", category: "milkshake", categoryName: "Milkshake", price: 5.40, bgBadge: "bg-info text-dark", desc: "Malted milk balls crushed into rich chocolate cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToEJvkVXrLFyM3cz0msMIiDgYXe7wEPu-xG9eYLqWCOw&s=10" },
+            { id: 62, name: "Chocolate Brownie Shake", category: "milkshake", categoryName: "Milkshake", price: 5.90, bgBadge: "bg-info text-dark", desc: "Fudgy brownie chunks blended with Belgian chocolate cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0doo_KqYAp7uxqtw7MRgYcBXoTXqB4Fuvg2moK6AccA&s=10" },
+            { id: 63, name: "Mango Ice Cream Shake", category: "milkshake", categoryName: "Milkshake", price: 5.20, bgBadge: "bg-info text-dark", desc: "Alphonso mango pulp blended with rich vanilla ice cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLb1G0u19N_lwJy3Dh_HrW77PUNAqBbYOxsE4cntohLA&s=10" },
+            { id: 64, name: "Salted Caramel Shake", category: "milkshake", categoryName: "Milkshake", price: 5.30, bgBadge: "bg-info text-dark", desc: "Sea salt caramel syrup blended with whipped cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIkxWbL9TQaNcfE6aW_2FBHlVyZ4fxsLfQmaSJ_WTFgw&s=10" },
+            { id: 65, name: "Blueberry Oreo Shake", category: "milkshake", categoryName: "Milkshake", price: 5.70, bgBadge: "bg-info text-dark", desc: "Wild blueberries blended with classic Oreo cookie crumbs.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgGFQKvhT0ApYueKr_jKqP-eGPih-cdN3XxC7TKzdNVw&s=10" },
+            { id: 66, name: "Cookies & Cream Shake", category: "milkshake", categoryName: "Milkshake", price: 5.40, bgBadge: "bg-info text-dark", desc: "Chocolate chip cookie bits folded into heavy cream.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMxY2QWzgaFyXh2ivSJBbKKRjpcVMIDm5X9F7VHa2m4Q&s=10" },
+            { id: 67, name: "Cotton Candy Milkshake", category: "milkshake", categoryName: "Milkshake", price: 5.60, bgBadge: "bg-info text-dark", desc: "Sweet pink cotton candy syrup with vanilla soft serve.", img: "data:image/jpeg;base64,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" },
+            { id: 68, name: "Peanut Butter Crunch", category: "milkshake", categoryName: "Milkshake", price: 5.50, bgBadge: "bg-info text-dark", desc: "Creamy peanut butter blended with chocolate swirl.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs3N0kYK_wnUpx91DA67wz1d59c_F44rj7tsP_DQL17w&s=10" },
+
+            { id: 69, name: "100% Pure Mango Juice", category: "fresh", categoryName: "Fresh Juice", price: 4.00, bgBadge: "bg-warning text-dark", desc: "Freshly squeezed natural mango pulp without added sugar.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbpzZeTrnmNZZeHwU26ypTVQa2n4S7aTBIwjnZDEktzQ&s=10" },
+            { id: 70, name: "Orange Lemon Fresh", category: "fresh", categoryName: "Fresh Juice", price: 3.80, bgBadge: "bg-warning text-dark", desc: "Sun-ripened oranges squeezed with fresh lemon juice.", img: "https://images.unsplash.com/photo-1613478223719-2ab802602423?q=80&w=600&auto=format&fit=crop" },
+            { id: 71, name: "Natural Strawberry Juice", category: "fresh", categoryName: "Fresh Juice", price: 4.10, bgBadge: "bg-warning text-dark", desc: "Handpicked fresh strawberries blended into pure juice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvUpGMySmgFDknxWI38c3AJCJQoLib9YVQIp4l7EZb3Q&s=10" },
+            { id: 72, name: "Guava with Whole Milk", category: "fresh", categoryName: "Fresh Juice", price: 3.90, bgBadge: "bg-warning text-dark", desc: "Fresh white guava blended with pasteurized milk.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkmNkT1HlpLmhCwkulY10oxRT3lyaznFidkjF-0_rYOQ&s=10" },
+            { id: 73, name: "Fresh Watermelon Juice", category: "fresh", categoryName: "Fresh Juice", price: 3.50, bgBadge: "bg-warning text-dark", desc: "Cold pressed sweet red watermelon juice over ice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoIxdY8Z3DLdDRpzAJsmySHVwqRbCT6ZKiOf-LlwtmEA&s=10" },
+            { id: 74, name: "Golden Pineapple Juice", category: "fresh", categoryName: "Fresh Juice", price: 4.20, bgBadge: "bg-warning text-dark", desc: "100% pure golden pineapple juice freshly pressed.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDpz_npjLEcVuhBHWbsejkBREIUh8j7Ng8yIUTyXsy6w&s=10" },
+            { id: 75, name: "Pure Pomegranate Press", category: "fresh", categoryName: "Fresh Juice", price: 4.80, bgBadge: "bg-warning text-dark", desc: "Tart and sweet red pomegranate seeds cold squeezed.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSodM5pOFVHHZeD_YuMk18YwhKJLepknzltveh8pcQwOQ&s=10" },
+            { id: 76, name: "Sugarcane Lime Press", category: "fresh", categoryName: "Fresh Juice", price: 3.20, bgBadge: "bg-warning text-dark", desc: "Raw pressed sugarcane juice served with lime wedge.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkKby94KkQ4fVTHCddfpoBzmi_w5Nv4_UqGsTu52GQvA&s" },
+            { id: 77, name: "Sweet Cantaloupe Juice", category: "fresh", categoryName: "Fresh Juice", price: 3.70, bgBadge: "bg-warning text-dark", desc: "Freshly blended melon juice served ice cold.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkR-cklxKm4e_H6NLKYiJ8nsFvmpaN_pKdefQwXLv2Ag&s=10" },
+            { id: 78, name: "Lemon Mint Refresher", category: "fresh", categoryName: "Fresh Juice", price: 3.60, bgBadge: "bg-warning text-dark", desc: "Zesty lemon juice blended with crushed mint leaves.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRseM05uuHIj3jHYe3YiWfVsZMNLsByDdB5HCdpVPp3ww&s=10" },
+            { id: 79, name: "Pure Kiwi Fruit Juice", category: "fresh", categoryName: "Fresh Juice", price: 4.30, bgBadge: "bg-warning text-dark", desc: "Tangy green kiwi pulp crushed fresh to order.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHk6mOSazVsRCvRofmRM9q4jso74h2rFTJDY68Ahzrvg&s=10" },
+            { id: 80, name: "Banana Milk & Honey Juice", category: "fresh", categoryName: "Fresh Juice", price: 3.80, bgBadge: "bg-warning text-dark", desc: "Ripened bananas blended with milk and raw honey.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TOfyZrZ2k_zN0OiORlKCy1mZKMmW9KFNCeM7mp3BgQ&s=10" },
+            { id: 81, name: "Fresh Apricot Nectar", category: "fresh", categoryName: "Fresh Juice", price: 4.00, bgBadge: "bg-warning text-dark", desc: "Sweet apricot fruit crushed with natural fruit syrup.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4f39iHAUxueoFzRUeqpEiLXagma8vQ2lKOGpYClkt1g&s=10" },
+            { id: 82, name: "Red Apple Juice", category: "fresh", categoryName: "Fresh Juice", price: 3.90, bgBadge: "bg-warning text-dark", desc: "Crisp red apples cold-pressed for maximum flavor.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZgMNPBNO9eJGOfdhcTSerBXhW_RPbr5j8YrGpKt94rA&s=10" },
+            { id: 83, name: "Fresh Plum Nectar", category: "fresh", categoryName: "Fresh Juice", price: 4.10, bgBadge: "bg-warning text-dark", desc: "Ripe red plums blended into a refreshing summer juice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqq7exe-eAnZAvR61y8yhcG4EdSTJQVWzljCDvQFu0iA&s=10" },
+            { id: 84, name: "Red Grape Juice", category: "fresh", categoryName: "Fresh Juice", price: 4.20, bgBadge: "bg-warning text-dark", desc: "Sweet seedless red grapes pressed fresh.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZFlxQlOE7Ty7sczoiEOKOLGsMIEjKHhhhmW6KkngKpw&s=10" },
+
+            { id: 85, name: "Green Goddess Detox", category: "detox", categoryName: "Healthy Detox", price: 4.90, bgBadge: "bg-success", desc: "Spinach, green apple, cucumber, and lemon cold pressed.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 86, name: "Carrot Orange Ginger Detox", category: "detox", categoryName: "Healthy Detox", price: 4.60, bgBadge: "bg-success", desc: "Carrot roots, oranges, and fresh spicy ginger root.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 87, name: "Cucumber Mint Cleanser", category: "detox", categoryName: "Healthy Detox", price: 4.20, bgBadge: "bg-success", desc: "Hydrating cucumber, mint leaves, and lime infused water.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 88, name: "Ginger Lemon Tonic", category: "detox", categoryName: "Healthy Detox", price: 4.30, bgBadge: "bg-success", desc: "Fresh ginger juice, organic lemon, cayenne pepper, and honey.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 89, name: "Apple Cinnamon Flush", category: "detox", categoryName: "Healthy Detox", price: 4.50, bgBadge: "bg-success", desc: "Red apple juice infused with organic cinnamon sticks.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 90, name: "Beetroot Pomegranate Rush", category: "detox", categoryName: "Healthy Detox", price: 5.10, bgBadge: "bg-success", desc: "Raw beetroots, pomegranate seeds, and green apple blend.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 91, name: "Celery Apple Hydrate", category: "detox", categoryName: "Healthy Detox", price: 4.80, bgBadge: "bg-success", desc: "Organic celery stalks pressed with crisp green apples.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 92, name: "Pineapple Ginger Glow", category: "detox", categoryName: "Healthy Detox", price: 4.70, bgBadge: "bg-success", desc: "Pineapple, turmeric, and fresh ginger juice mix.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 93, name: "Parsley Lemon Alkalizer", category: "detox", categoryName: "Healthy Detox", price: 4.10, bgBadge: "bg-success", desc: "Fresh garden parsley blended with lemon juice.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 94, name: "Berry Lemon Antioxidant", category: "detox", categoryName: "Healthy Detox", price: 5.00, bgBadge: "bg-success", desc: "Crushed blueberries, lemon juice, and coconut water.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 95, name: "Aloe Vera Kiwi Slim", category: "detox", categoryName: "Healthy Detox", price: 5.20, bgBadge: "bg-success", desc: "Organic aloe vera gel crushed with kiwis and green apple.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 96, name: "Iced Matcha Mint Detox", category: "detox", categoryName: "Healthy Detox", price: 4.90, bgBadge: "bg-success", desc: "Matcha green tea brewed with fresh mint and lemon.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 97, name: "Chia Seed Lemon Booster", category: "detox", categoryName: "Healthy Detox", price: 4.40, bgBadge: "bg-success", desc: "Hydrated chia seeds in lemon honey water.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 98, name: "Turmeric Immunity Shot", category: "detox", categoryName: "Healthy Detox", price: 4.50, bgBadge: "bg-success", desc: "Raw turmeric root, orange, ginger, and black pepper.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 99, name: "Grapefruit Slim Detox", category: "detox", categoryName: "Healthy Detox", price: 4.30, bgBadge: "bg-success", desc: "Freshly pressed pink grapefruit with rosemary sprig.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" },
+            { id: 100, name: "Hibiscus Mint Refresher", category: "detox", categoryName: "Healthy Detox", price: 4.00, bgBadge: "bg-success", desc: "Cold brewed organic hibiscus tea with lime and mint.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwT92ulFaBQCRrbzxyBwEN_EUgfR67wiAhFLPvWf-b7Q&s=10" }
+        ];
+
+        document.getElementById('countAll').innerText = products.length;
+
+        let cart = [];
+
+        function renderProducts(items) {
+            const container = document.getElementById('juiceContainer');
+            const badgeCounter = document.getElementById('itemCounterBadge');
+            container.innerHTML = '';
+
+            badgeCounter.innerText = `Showing ${items.length} Drinks`;
+
+            if (items.length === 0) {
+                container.innerHTML = `<div class="col-12 text-center py-5 text-muted fw-bold">No drinks found matching your search.</div>`;
+                return;
+            }
+
+            items.forEach(prod => {
+                const html = `
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden bg-light">
+                            <img src="${prod.img}" class="card-img-top object-fit-cover" style="height: 160px;" alt="${prod.name}">
+                            <div class="card-body p-3 d-flex flex-column justify-content-between">
+                                <div>
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <span class="fw-black fs-5 text-success">$${prod.price.toFixed(2)}</span>
+                                        <span class="badge ${prod.bgBadge}">${prod.categoryName}</span>
+                                    </div>
+                                    <h6 class="card-title fw-bold text-dark mb-1">${prod.name}</h6>
+                                    <p class="card-text text-muted fs-7">${prod.desc}</p>
+                                </div>
+                                <button onclick="addToCart(${prod.id})" class="btn fw-bold w-100 mt-2 text-white border-0 shadow-sm py-2 rounded-3" style="background: linear-gradient(135deg, #ff6b35, #d90429);">
+                                    <i class="fa-solid fa-cart-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existItem = cart.find(item => item.id === productId);
+
+            if (existItem) {
+                existItem.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI();
+            
+            const toastEl = document.getElementById('addToast');
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
+        function updateCartUI() {
+            const listContainer = document.getElementById('cartItemsList');
+            const badge = document.getElementById('cartBadge');
+            const totalPriceEl = document.getElementById('cartTotalPrice');
+            const btnCheckout = document.getElementById('btnCheckout');
+
+            listContainer.innerHTML = '';
+            let totalQty = 0;
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                listContainer.innerHTML = `<div class="text-center text-muted py-5"><i class="fa-solid fa-basket-shopping fs-1 mb-2"></i><p>Your cart is empty.</p></div>`;
+                btnCheckout.disabled = true;
+            } else {
+                btnCheckout.disabled = false;
+                cart.forEach(item => {
+                    totalQty += item.qty;
+                    totalPrice += item.price * item.qty;
+
+                    const itemHtml = `
+                        <div class="d-flex align-items-center gap-2 p-2 bg-light rounded-3 shadow-sm border">
+                            <img src="${item.img}" class="rounded-2 object-fit-cover" style="width: 50px; height: 50px;" alt="">
+                            <div class="flex-grow-1">
+                                <h6 class="m-0 fw-bold fs-7 text-dark">${item.name}</h6>
+                                <small class="text-success fw-bold">$${(item.price * item.qty).toFixed(2)}</small>
+                            </div>
+                            <div class="d-flex align-items-center gap-1">
+                                <button onclick="changeQty(${item.id}, -1)" class="btn btn-sm btn-outline-secondary px-2 py-0 fw-bold">-</button>
+                                <span class="fw-bold px-1">${item.qty}</span>
+                                <button onclick="changeQty(${item.id}, 1)" class="btn btn-sm btn-outline-secondary px-2 py-0 fw-bold">+</button>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" class="btn btn-sm text-danger border-0"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    `;
+                    listContainer.innerHTML += itemHtml;
+                });
+            }
+
+            badge.innerText = totalQty;
+            totalPriceEl.innerText = '$' + totalPrice.toFixed(2);
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'text-white');
+                    b.classList.add('bg-light', 'text-dark');
+                    b.style.background = '';
+                });
+
+                this.classList.add('active', 'text-white');
+                this.classList.remove('bg-light', 'text-dark');
+                this.style.background = 'linear-gradient(135deg, #ff6b35, #ff85a1)';
+
+                const category = this.getAttribute('data-category');
+                if (category === 'all') {
+                    renderProducts(products);
+                } else {
+                    renderProducts(products.filter(p => p.category === category));
+                }
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.trim().toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            renderProducts(filtered);
+        });
+
+        document.getElementById('btnCheckout').addEventListener('click', function() {
+            cart = [];
+            updateCartUI();
+            
+            const offcanvasEl = document.getElementById('cartOffcanvas');
+            const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+            if (offcanvas) offcanvas.hide();
+
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+        });
+
+        renderProducts(products);
+        updateCartUI();
+    </script>
+</body>
+</html>
